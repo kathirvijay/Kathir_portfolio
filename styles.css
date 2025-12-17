@@ -283,6 +283,10 @@ body {
     font-size: var(--font-size-sm);
     position: relative;
     transition: var(--transition-base);
+    display: inline-flex;
+    align-items: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: 999px;
 }
 
 .nav-link::after {
@@ -372,6 +376,7 @@ body {
     height: 16px;
     transition: var(--transition-base);
     opacity: 0.8;
+    color: var(--text-primary);
 }
 
 .theme-toggle-icon.sun {
@@ -388,6 +393,8 @@ body {
 
 [data-theme="dark"] .theme-toggle-icon.moon {
     display: block;
+    color: #ffffff; /* make moon icon clearly white in dark mode */
+    opacity: 1;
 }
 
 /* Color Palette Picker */
@@ -1323,7 +1330,7 @@ section:last-child::after {
     transition: all var(--transition-base);
     position: relative;
     overflow: hidden;
-    cursor: default;
+    cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 6px;
@@ -1337,17 +1344,7 @@ section:last-child::after {
 }
 
 .skill-tag::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    border-radius: 50%;
-    background: var(--primary);
-    transform: translate(-50%, -50%);
-    transition: width 0.4s, height 0.4s;
-    z-index: 0;
+    content: none; /* disable hover overlay so it doesn't cover text */
 }
 
 .skill-tag > * {
@@ -1355,16 +1352,11 @@ section:last-child::after {
     z-index: 1;
 }
 
-.skill-tag:hover::before {
-    width: 150%;
-    height: 150%;
-}
-
 .skill-tag:hover {
     color: white;
     border-color: var(--primary);
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 4px 12px rgba(var(--primary-rgb, 99, 102, 241), 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(var(--primary-rgb, 99, 102, 241), 0.2);
 }
 
 .skill-tag:hover .skill-icon {
@@ -1666,6 +1658,7 @@ section:last-child::after {
     gap: var(--spacing-lg);
     max-width: 900px;
     margin: 0 auto;
+    align-items: stretch;
 }
 
 .contact-item {
@@ -1675,7 +1668,8 @@ section:last-child::after {
     border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
+    gap: var(--spacing-xs);
+    height: 100%;
     text-decoration: none;
     color: inherit;
     transition: all var(--transition-base);
@@ -1737,6 +1731,9 @@ section:last-child::after {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
+    flex: 1;
+    align-items: center;
+    text-align: center;
 }
 
 .contact-label {
@@ -1746,9 +1743,19 @@ section:last-child::after {
 }
 
 .contact-value {
-    font-size: var(--font-size-base);
+    font-size: var(--font-size-sm);
     color: var(--text-primary);
     font-weight: 600;
+    padding: 0 var(--spacing-md);
+}
+
+.contact-email {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.contact-nowrap {
+    white-space: nowrap;
 }
 
 /* Footer */
@@ -2099,6 +2106,10 @@ section:last-child::after {
 }
 
 @media (max-width: 480px) {
+    .contact-value,
+    .contact-nowrap {
+        white-space: normal;
+    }
     .hero-name {
         font-size: var(--font-size-4xl);
     }
